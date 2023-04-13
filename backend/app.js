@@ -7,6 +7,8 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
+// backend/app.js
+const routes = require('./routes');
 
 // create app
 const app = express();
@@ -37,3 +39,7 @@ app.use(
         }
     })
 );
+
+app.use(routes); // Connect all the routes
+
+module.exports = app;
