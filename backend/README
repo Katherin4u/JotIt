@@ -1,0 +1,6 @@
+## Useful commands
+- npx dotenv sequelize db:migrate:undo
+- sqlite3 db/dev.db ".schema Users" -> Shows you the table inputted
+- npx dotenv sequelize db:migrate
+- https://sequelize.org/docs/v6/core-concepts/validations-and-constraints/ -> Constraints + validations
+- Model scoping https://sequelize.org/master/manual/scopes.html -> Protects inputs (such as passwords)
