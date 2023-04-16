@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
       return bcrypt.compareSync(password, this.hashedPassword.toString());
     }
     toSafeObject() {
-      const { id, username, email } = this; // context will be the User instance
-      return { id, username, email };
+      const { id, firstName, lastName, imgUrl, username, email } = this; // context will be the User instance
+      return { id, firstName, lastName, imgUrl, username, email };
     }
     static getCurrentUserById(id) {
       return User.scope("currentUser").findByPk(id);
@@ -30,10 +30,13 @@ module.exports = (sequelize, DataTypes) => {
         return await User.scope('currentUser').findByPk(user.id);
       }
     }
-    static async signup({ username, email, password }) {
+    static async signup({ firstName, lastName, imgUrl, username, email, password }) {
       const hashedPassword = bcrypt.hashSync(password);
       const user = await User.create({
         username,
+        firstName,
+        lastName,
+        imgUrl,
         email,
         hashedPassword
       });
@@ -45,10 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
 
-
-
   User.init(
-
     {
       username: {
         type: DataTypes.STRING,
@@ -61,6 +61,18 @@ module.exports = (sequelize, DataTypes) => {
             }
           }
         }
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      imgUrl: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       email: {
         type: DataTypes.STRING,
@@ -79,7 +91,6 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
-
       sequelize,
       modelName: "User",
       defaultScope: {
