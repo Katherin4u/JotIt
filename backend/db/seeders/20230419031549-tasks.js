@@ -6,22 +6,26 @@ if (process.env.NODE_ENV === 'production') {
 
 const demoTasks = [
   {
-    text: 'First Task',
+    title: 'First Task',
+    text: 'First Task Text',
     priority: 'Medium',
     userId: 1
   },
   {
-    text: 'Second Task',
+    title: 'Second Task',
+    text: 'Second Task Text',
     priority: 'Low',
     userId: 1
   },
   {
-    text: 'Third Task',
+    title: 'Third Task',
+    text: 'Third Task Text',
     priority: 'High',
     userId: 1
   },
   {
-    text: 'Fourth Task',
+    title: 'Fourth Task',
+    text: 'Fourth Task Text',
     priority: 'Low',
     userId: 2
   },

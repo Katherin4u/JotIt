@@ -3,24 +3,25 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Notebook extends Model {
+  class TagTask extends Model {
     static associate(models) {
       // define association here
-      Notebook.belongsTo(models.User, { foreignKey: 'userId' })
+      TagTask.belongsTo(models.Task, { foreignKey: 'taskId' })
+      TagTask.belongsTo(models.Tag, { foreignKey: 'tagId' })
     }
   }
-  Notebook.init({
-    title: {
-      type: DataTypes.STRING,
+  TagTask.init({
+    tagId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    userId: {
+    taskId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
   }, {
     sequelize,
-    modelName: 'Notebook',
+    modelName: 'TagTask',
   });
-  return Notebook;
+  return TagTask;
 };
