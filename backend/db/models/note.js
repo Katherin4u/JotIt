@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Note.belongsTo(models.User, { foreignKey: 'userId' })
-      Note.belongsTo(models.NoteBook, { foreignKey: 'notebookId' })
+      Note.belongsTo(models.Notebook, { foreignKey: 'notebookId' })
     }
   }
   Note.init({
