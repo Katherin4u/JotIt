@@ -16,10 +16,12 @@ module.exports = {
       },
       tagId: {
         type: Sequelize.INTEGER,
+        references: {model: 'Tags'},
         allowNull: false,
       },
       taskId: {
         type: Sequelize.INTEGER,
+        references: {model: 'Tasks'},
         allowNull: false,
       },
       createdAt: {

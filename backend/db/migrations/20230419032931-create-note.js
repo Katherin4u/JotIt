@@ -28,10 +28,12 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
+        references: {model: 'Users'},
         allowNull: false,
       },
       notebookId: {
         type: Sequelize.INTEGER,
+        references: {model: 'Notebooks'},
         allowNull: false,
       },
       createdAt: {
