@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Tag.belongsTo(models.User, { foreignKey: 'userId' })
+      Tag.hasMany(models.TagTask, {foreignKey: "tagId"})
     }
   }
   Tag.init({

@@ -47,6 +47,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Tag, { foreignKey: 'userId' });
       User.hasMany(models.Task, { foreignKey: 'userId' });
       User.hasMany(models.Notebook, { foreignKey: 'userId' });
+      User.hasMany(models.Note, {foreignKey: 'userId'})
     }
   };
 
