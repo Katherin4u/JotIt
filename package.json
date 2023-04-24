@@ -4,8 +4,7 @@
   "description": "![image](https://user-images.githubusercontent.com/107587143/232376848-5764c1de-745f-4d39-bb11-395de3b6a2f2.png)",
   "main": "index.js",
   "scripts": {
-    "render-postbuild": "npm run build --prefix frontend",
-    "install": "npm --prefix backend install backend && npm --prefix frontend install frontend",
+    "install": "npm --prefix backend install backend",
     "dev:backend": "npm install --prefix backend start",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
