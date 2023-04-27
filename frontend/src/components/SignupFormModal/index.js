@@ -11,6 +11,7 @@ function SignupFormModal() {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [password, setPassword] = useState("");
+    const [imgUrl, setImgUrl] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const { closeModal } = useModal();
@@ -19,7 +20,7 @@ function SignupFormModal() {
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ email, username, firstName, lastName, password }))
+            return dispatch(sessionActions.signup({ email, username, firstName, lastName, password, imgUrl }))
                 .then(closeModal)
                 .catch(async (res) => {
                     const data = await res.json();
@@ -69,6 +70,15 @@ function SignupFormModal() {
                         type="text"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
+                        required
+                    />
+                </label>
+                <label>
+                    Image URL
+                    <input
+                        type="text"
+                        value={imgUrl}
+                        onChange={(e) => setImgUrl(e.target.value)}
                         required
                     />
                 </label>
