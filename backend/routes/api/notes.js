@@ -40,6 +40,31 @@ router.put('/:noteId', requireAuth, async (req, res) => {
 })
 
 //deleting the note
+router.delete('/:noteId', requireAuth, async (req, res) => {
+    const noteId = req.params.noteId
+    const userId = req.user.id
 
+    const note = await Note.findByPk(noteId);
+
+    //check to see if the note exists
+    if(!note){
+        return res.status(404).json({message: "Note couldn't be found", statusCode: 403})
+    }
+    // check to see if the user id matches the note user id
+    if(note.userId !== userId){
+        return res.status(403).json({
+            message: "Not Authorized",
+            statusCode: 403
+        })
+    }
+
+    await note.destroy();
+
+    return res.status(200).json({
+        message: "Successfully deleted",
+        statusCode: 200
+    })
+
+}) 
 
 module.exports = router;

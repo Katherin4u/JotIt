@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const { Op } = require('sequelize');
-const { Notebook, Note } = require('../../db/models');
+const { Notebook, Note, User } = require('../../db/models');
 const { requireAuth } = require("../../utils/auth");
 
 
@@ -31,13 +31,13 @@ router.put('/:notebookId', requireAuth, async (req, res) => {
 
     const notebook = await Notebook.findByPk(notebookId)
 
-    //checks to see if the tag does not exists
+    //checks to see if the notebook does not exists
     if(!notebook) return res.status(404).json({message: "Notebook not found", statusCode: 404})
 
-    //checks to see if the current user is the owner of the tag
+    //checks to see if the current user is the owner of the notebook
     if(notebook.userId !== req.user.id) return res.status(403).json({message: "Not Authorized", statusCode: 403})
 
-    //update the Tag with the new data
+    //update the notebook with the new data
     const updateNotebook = await notebook.update({
        title
     })
@@ -53,11 +53,11 @@ router.delete('/:notebookId', requireAuth, async (req, res) => {
 
     const notebook = await Notebook.findByPk(notebookId);
 
-    //check to see if the tag exists
+    //check to see if the notebook exists
     if(!notebook){
         return res.status(404).json({message: "Notebook couldn't be found", statusCode: 403})
     }
-    // check to see if the user id matches the tag user id
+    // check to see if the user id matches the notebook user id
     if(notebook.userId !== userId){
         return res.status(403).json({
             message: "Not Authorized",
@@ -103,6 +103,28 @@ router.post('/:notebookId/notes', requireAuth, async (req, res) => {
 })
 
 //get all notes from a specific notebook
+router.get('/:notebookId/notes', async (req, res) => {
+    const notebookId = req.params.notebookId
 
+    //find the notebook with the matching id
+    const notebook = await Notebook.findByPk(notebookId)
+    //checks to see if the notebook was found
+    if (!notebook) return res.status(404).json({ message: "Notebook not found", statusCode: 404 });
+
+    //find all the notes for specific notebook
+    const notes = await Note.findAll({
+        where: {notebookId},
+        // include: [
+        //     {
+        //         model:User,
+        //         attributes: {
+        //             exclude: ["username", "hashedPassword", "email","firstName", "lastName", "imgUrl", "createdAt", "updatedAt"],
+        //         }
+        //     }
+        // ]
+    })
+
+    return res.json({Notes: notes})
+})
 
 module.exports = router;
