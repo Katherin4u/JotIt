@@ -17,13 +17,36 @@ router.get('/', async (req, res) => {
 
 
 //post a new Tag
-router.post('/',requireAuth, async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
     const userId = req.user.id
-    const {name, color} = req.body;
-    const user = await Tag.create({userId, name, color})
+    const { name, color } = req.body;
+    const user = await Tag.create({ userId, name, color })
     return res.json({
         user
     })
+})
+
+//edit an exisiting tag
+router.put('/:tagId', requireAuth, async (req, res) => {
+    const {name, color} = req.body;
+    const tagId = req.params.tagId
+
+    const tag = await Tag.findByPk(tagId)
+
+    //checks to see if the tag does not exists
+    if(!tag) return res.status(404).json({message: "Tag not found", statusCode: 404})
+
+    //checks to see if the current user is the owner of the tag
+    if(tag.userId !== req.user.id) return res.status(403).json({message: "Not Authorized", statusCode: 403})
+
+    //update the Tag with the new data
+    const updateTag = await tag.update({
+        name,
+        color
+    })
+
+    return res.status(200).json(updateTag)
+
 })
 
 
