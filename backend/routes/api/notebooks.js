@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router();
 const { Op } = require('sequelize');
-const { Notebook } = require('../../db/models');
+const { Notebook, Note } = require('../../db/models');
 const { requireAuth } = require("../../utils/auth");
 
 
@@ -73,6 +73,36 @@ router.delete('/:notebookId', requireAuth, async (req, res) => {
     })
 
 }) 
+
+
+// create a new Note
+router.post('/:notebookId/notes', requireAuth, async (req, res) => {
+    const userId = req.user.id
+    const notebookId = req.params.notebookId;
+    
+    const {title, subtitle, text} = req.body;
+
+    const specificNotebook = await Notebook.findByPk(notebookId, {
+        include: {
+            model: Note
+        }
+    })
+    //if the specific notebook isnt found
+    if (!specificNotebook) {
+        return res.status(404).json({
+            message: "Notebook couldn't be found",
+            statusCode: 404,
+        });
+    }
+
+
+    const user = await Note.create({userId, notebookId: +notebookId, title, subtitle, text})
+    return res.json({
+        user
+    })
+})
+
+//get all notes from a specific notebook
 
 
 module.exports = router;

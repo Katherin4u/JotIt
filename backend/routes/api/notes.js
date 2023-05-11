@@ -15,20 +15,29 @@ router.get('/', async (req,res) => {
 })
 
 
-// create a new Note
-//! this is associated to Notebook, not finished need to add the notebookId
-router.post('/', requireAuth, async (req, res) => {
-    const userId = req.user.id
-    
-    const {title, subtitle, text} = req.body;
-    const user = await Note.create({userId, title, subtitle, text})
-    return res.json({
-        user
-    })
-})
-
 // updating the note
+router.put('/:noteId', requireAuth, async (req, res) => {
+    const {title, subtitle, text} = req.body;
+    const noteId = req.params.noteId
 
+    const note = await Note.findByPk(noteId)
+
+    //checks to see if the note does not exists
+    if(!note) return res.status(404).json({message: "Note not found", statusCode: 404})
+
+    //checks to see if the current user is the owner of the note
+    if(note.userId !== req.user.id) return res.status(403).json({message: "Not Authorized", statusCode: 403})
+
+    //update the note with the new data
+    const updateNote = await note.update({
+       title,
+       subtitle,
+       text
+    })
+
+    return res.status(200).json(updateNote)
+
+})
 
 //deleting the note
 
