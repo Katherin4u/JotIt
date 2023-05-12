@@ -42,22 +42,36 @@ function ProfileButton({ user }) {
 
     return (
         <div>
-
-            <button onClick={openMenu} className="profile-btn">
-                <i className="fas fa-user-circle" />
-            </button>
-
+            <div className="main-button-div">
+                <button onClick={openMenu} className="profile-btn">
+                    {user ? (
+                        <div className="profile-arrow">
+                            <img className="profile-image" src={user.imgUrl}></img>
+                            <i class="fa-sharp fa-solid fa-angle-down"></i>
+                        </div>
+                    ) : (
+                        <div className="profile-arrow" >
+                            <i className="fas fa-user-circle" />
+                            <i class="fa-sharp fa-solid fa-angle-down"></i>
+                        </div>
+                    )
+                    }
+                </button>
+            </div>
             <div>
                 <ul className={ulClassName} ref={ulRef}>
                     <div className="list-profile-dropdown">
                         {user ? (
                             <div>
-                                <li>{user.username}</li>
-                                <li>{user.firstName} {user.lastName}</li>
-                                <li>{user.email}</li>
-                                <li>
-                                    <button onClick={logout}>Log Out</button>
-                                </li>
+
+                                <div className="main-container-user-info">
+                                    <div className="username">{user.username}</div>
+                                    <div className="firstname">{user.firstName} {user.lastName}</div>
+                                    <div className="email">{user.email}</div>
+                                </div>
+                                <div>
+                                    <button className="logout-button" onClick={logout}>Log Out</button>
+                                </div>
                             </div>
                         ) : (
                             <>

@@ -1,61 +1,85 @@
-.hidden{
+.hidden {
     display: none;
 }
 
 .navbar-fixed-left {
-    width: 178px;
-    position:fixed;
-    border-radius: 0;
+    width: 201px;
+    position: fixed;
     height: 100%;
     background-color:
         #2f3338;
     margin: 0;
     padding: none;
     display: flex;
-    justify-content: center;
 }
-
-.home-and-profile {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 0;
-}
-
-.home-link {
-    color: white;
-    text-decoration-line: none;
-    font-size: 20px;
-}
-
-
-.home-profile-main-div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.list-profile-dropdown {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    align-items: center;
-    background-color: #FFF;
-    top: 28rem;
-    right: -201px;
-    box-shadow: 0px 0px 14px 0.5px rgba(221, 221, 221, 0.7);
-    border-radius: 15px;
-    padding: 15px 0px;
-    list-style: none;
-    width: 200px;
-    overflow: hidden;
-    height: 6em;
-}
-
 
 .profile-btn {
     position: relative;
+    background-color: #484e55;
+    padding: 10px;
+    padding-left: 34px;
+    padding-right: 34px;
+    border: none;
 }
+
+.main-button-div {
+    padding-bottom: 2px;
+}
+
+.homelink-main-div {
+    position: relative;
+    background-color: #484e55;
+    padding: 10px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.profile-image {
+    width: 55px;
+    height: 55px;
+    border-radius: 20px;
+}
+
+.fa-user-circle {
+    font-size: 55px;
+}
+
+.fa-angle-down {
+    padding-left: 20px;
+    font-size: 20px;
+}
+
+.profile-arrow {
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+}
+
+.main-container-user-info {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    
+}
+
+.firstname{
+    color: white;
+}
+
+.email{
+    color: white;
+}
+
+.username{
+    color: white;
+}
+
+.logout-button{
+    position: relative;
+    background-color: #484e55;
+    padding: 10px;
+    padding-left: 34px;
+    padding-right: 34px;
+    border: none;
+}
+
