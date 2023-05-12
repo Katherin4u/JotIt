@@ -1,0 +1,43 @@
+.navbar-fixed-left {
+    width: 178px;
+    position: fixed;
+    border-radius: 0;
+    height: 100%;
+    background-color:
+        #2f3338;
+    margin: 0;
+    padding: none;
+    display: flex;
+}
+
+.home-and-profile {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-link {
+    color: white;
+    text-decoration-line: none;
+    font-size: 20px;
+}
+
+.profile-dropdown{
+    /* background-color: white; */
+    justify-content: center;
+    
+}
+
+.home-profile-main-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-button{
+    justify-content: center;
+    align-items: center;
+}
