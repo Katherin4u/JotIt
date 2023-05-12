@@ -13,14 +13,14 @@ function Navigation({ isLoaded }) {
       <div className='home-profile-main-div'>
         <div className='home-and-profile'>
           <div>
-            <NavLink className='home-link' exact to="/">Home</NavLink>
+            <NavLink className='home-link' style={{ all: 'unset' }}  exact to="/">Home</NavLink>
           </div>
         </div>
         <div className='home-and-profile'>
           {isLoaded && (
-            <li className='profile-dropdown'>
-              <ProfileButton user={sessionUser} />
-            </li>
+            <div className='profile-dropdown'>
+              <ProfileButton  user={sessionUser} />
+            </div>
           )}
         </div>
       </div>
