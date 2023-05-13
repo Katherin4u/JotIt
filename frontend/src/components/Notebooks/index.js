@@ -14,12 +14,19 @@ const AllNotebooks = () => {
         dispatch(getAllNotebookThunk())
     }, [dispatch])
 
+    // hangle notebooks being clicked
+    const handleNotebookClick = (notebookId) => {
+        history.push(`/notebooks/${notebookId}`);
+    };
+
     return (
         <div className="main-spot-Container">
             <h2>Notebooks</h2>
             {notebooks.map((notebook) => (
                 <div>
-                    {notebook.title}
+                    <div key={notebook.id} onClick={() => handleNotebookClick(notebook.id)}>
+                        {notebook.title}
+                    </div>
                 </div>
             ))}
 

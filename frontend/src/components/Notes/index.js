@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { getAllNotesThunk } from "../../store/notebooks";
 import './index.css'
 
 const AllNotes = () => {
     const dispatch = useDispatch();
+    const { noteId } = useParams();
     const notesThunk = useSelector((state) => state.notebooks.notes)
     const notes = Object.values(notesThunk)
-    console.log(notes)
 
     useEffect(() => {
-        dispatch(getAllNotesThunk(1))
+        dispatch(getAllNotesThunk(noteId))
     }, [dispatch])
 
     return (

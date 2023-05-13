@@ -23,7 +23,7 @@ function App() {
           <Route path="/notebooks">
             <Notebooks />
           </Route>
-          <Route path="/notes/:noteId">
+          <Route path="/notebook/:noteId">
             <AllNotes />
           </Route>
         </Switch>
