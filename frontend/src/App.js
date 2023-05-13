@@ -5,6 +5,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import Notebooks from "./components/Notebooks";
+import AllNotes from "./components/Notes";
 
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
         <Switch>
           <Route path="/notebooks">
             <Notebooks />
+          </Route>
+          <Route path="/notes/:noteId">
+            <AllNotes />
           </Route>
         </Switch>
       )}

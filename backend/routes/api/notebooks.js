@@ -18,15 +18,6 @@ router.get('/', requireAuth, async (req, res) => {
     return res.json(allNotebooks);
 });
 
-// //get all notebooks
-// router.get('/', async (req, res) => {
-//     const allNotebooks = await Notebook.findAll();
-
-//     const notebookList = allNotebooks.map((notebook) => notebook.toJSON());
-
-//     return res.json({ Notebook: notebookList });
-// });
-
 //post a new notebook
 router.post('/', requireAuth, async (req, res) => {
     const userId = req.user.id
@@ -121,23 +112,17 @@ router.get('/:notebookId/notes', async (req, res) => {
 
     //find the notebook with the matching id
     const notebook = await Notebook.findByPk(notebookId)
+
     //checks to see if the notebook was found
     if (!notebook) return res.status(404).json({ message: "Notebook not found", statusCode: 404 });
 
     //find all the notes for specific notebook
+    // This does not need the userId, since only that user can access that notebook
     const notes = await Note.findAll({
         where: { notebookId },
-        // include: [
-        //     {
-        //         model:User,
-        //         attributes: {
-        //             exclude: ["username", "hashedPassword", "email","firstName", "lastName", "imgUrl", "createdAt", "updatedAt"],
-        //         }
-        //     }
-        // ]
     })
 
-    return res.json({ Notes: notes })
+    return res.json(notes)
 })
 
 module.exports = router;
