@@ -8,20 +8,23 @@ import './Navigation.css';
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
+
+  console.log(sessionUser)
+
   return (
     <div className="navbar navbar-inverse navbar-fixed-left">
       <div className='home-profile-main-div'>
         <div className='home-and-profile'>
-          <div>
-            <NavLink className='home-link' style={{ all: 'unset' }}  exact to="/">Home</NavLink>
+          <div className='home-and-profile'>
+            {isLoaded && (
+              <div className='profile-dropdown'>
+                <ProfileButton user={sessionUser} />
+              </div>
+            )}
           </div>
-        </div>
-        <div className='home-and-profile'>
-          {isLoaded && (
-            <div className='profile-dropdown'>
-              <ProfileButton  user={sessionUser} />
-            </div>
-          )}
+          <div className='homelink-main-div'>
+            <NavLink className='home-link' style={{ all: 'unset' }} exact to="/">Home</NavLink>
+          </div>
         </div>
       </div>
     </div>
