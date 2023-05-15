@@ -2,6 +2,12 @@
     display: none;
 }
 
+.home-link {
+    color: white;
+    text-decoration-line: none;
+    font-weight: bold;
+}
+
 .navbar-fixed-left {
     width: 201px;
     position: fixed;
@@ -59,27 +65,37 @@
     display: flex;
     flex-direction: column;
     padding-left: 20px;
-    
+    padding-bottom: 10px;
 }
 
-.firstname{
+.firstname {
     color: white;
 }
 
-.email{
+.email {
     color: white;
 }
 
-.username{
+.username {
     color: white;
 }
 
-.logout-button{
+.logout-button {
     position: relative;
     background-color: #484e55;
     padding: 10px;
-    padding-left: 34px;
-    padding-right: 34px;
     border: none;
+    width: 179px;
+    color: white;
 }
 
+.modaltext {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 0;
+    background-color: #484e55;
+    cursor: pointer;
+}

@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import OpenModalMenuItem from './OpenModalMenuItem';
+import CreateTasks from '../Task';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -23,7 +25,13 @@ function Navigation({ isLoaded }) {
             )}
           </div>
           <div className='homelink-main-div'>
-            <NavLink className='home-link' style={{ all: 'unset' }} exact to="/">Home</NavLink>
+            <NavLink className='home-link' exact to="/">Home</NavLink>
+          </div>
+          <div style={{paddingTop: '2px'}}>
+            <OpenModalMenuItem
+              itemText='Create Task'
+              modalComponent={<CreateTasks />}
+            />
           </div>
         </div>
       </div>

@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Task.init({
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     text: {
       type: DataTypes.STRING,
       allowNull: false,

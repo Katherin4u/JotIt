@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import CreateTasks from "./components/Task";
+import AllTasks from "./components/AllTasks";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -16,6 +19,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path="/tasks" >
+            <AllTasks />
+          </Route>
         </Switch>
       )}
     </>
