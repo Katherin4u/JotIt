@@ -16,7 +16,7 @@ const AllNotebooks = () => {
 
     // hangle notebooks being clicked
     const handleNotebookClick = (notebookId) => {
-        history.push(`/notebooks/${notebookId}`);
+        history.push(`/notebook/${notebookId}`);
     };
 
     return (
