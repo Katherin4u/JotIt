@@ -3,8 +3,11 @@ import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import Notebooks from "./components/Notebooks";
+import AllNotes from "./components/Notes";
 import CreateTasks from "./components/Task";
 import AllTasks from "./components/AllTasks";
+
 
 
 function App() {
@@ -19,6 +22,12 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route path="/notebooks">
+            <Notebooks />
+          </Route>
+          <Route path="/notebook/:noteId">
+            <AllNotes />
+          </Route>
           <Route path="/tasks" >
             <AllTasks />
           </Route>
