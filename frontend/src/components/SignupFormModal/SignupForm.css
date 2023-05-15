@@ -1,0 +1,9 @@
+.signup-form-split {
+    display: flex;
+
+}
+
+.main-signup-modal-container {
+    height: 500px;
+    width: 570px;
+}
