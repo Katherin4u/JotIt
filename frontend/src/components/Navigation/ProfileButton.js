@@ -59,14 +59,13 @@ function ProfileButton({ user }) {
                 </button>
             </div>
             <div>
-                <ul className={ulClassName} ref={ulRef}>
+                <ul className={ulClassName} ref={ulRef} style={{ paddingLeft:'0px', margin: '10px'}}>
                     <div className="list-profile-dropdown">
                         {user ? (
-                            <div>
-
+                            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: "center"}}>
                                 <div className="main-container-user-info">
                                     <div className="username">{user.username}</div>
-                                    <div className="firstname">{user.firstName} {user.lastName}</div>
+                                    {/* <div className="firstname">{user.firstName} {user.lastName}</div> */}
                                     <div className="email">{user.email}</div>
                                 </div>
                                 <div>
@@ -74,18 +73,26 @@ function ProfileButton({ user }) {
                                 </div>
                             </div>
                         ) : (
-                            <>
-                                <OpenModalMenuItem
-                                    itemText="Log In"
-                                    onItemClick={closeMenu}
-                                    modalComponent={<LoginFormModal />}
-                                />
-                                <OpenModalMenuItem
-                                    itemText="Sign Up"
-                                    onItemClick={closeMenu}
-                                    modalComponent={<SignupFormModal />}
-                                />
-                            </>
+                            <div>
+                                <div style={{ paddingBottom: "5px"}}>
+
+                                <div className="Login-main-container">
+                                    <OpenModalMenuItem
+                                        itemText="Log In"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<LoginFormModal />}
+                                    />
+                                </div>
+                                </div>
+                                <div className="signup-main-container">
+
+                                    <OpenModalMenuItem
+                                        itemText="Sign Up"
+                                        onItemClick={closeMenu}
+                                        modalComponent={<SignupFormModal />}
+                                    />
+                                </div>
+                            </div>
                         )}
 
                     </div>

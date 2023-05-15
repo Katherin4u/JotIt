@@ -23,7 +23,7 @@ function Navigation({ isLoaded }) {
             )}
           </div>
           <div className='homelink-main-div'>
-            <NavLink className='home-link' style={{ all: 'unset' }} exact to="/">Home</NavLink>
+            <NavLink className='home-link' exact to="/">Home</NavLink>
           </div>
         </div>
       </div>

@@ -1,0 +1,54 @@
+#modal-content {
+    border-radius: 30px;
+}
+
+.login-modal-main-container{
+    border-radius: 30px;
+    height: 400px;
+    width: 400px;
+}
+
+.login-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-email-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+}
+
+.email-input {
+    height: 25px;
+    width: 237px;
+    border-radius: 5px;
+}
+
+.login-password-container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+}
+
+.password-input {
+    height: 25px;
+    width: 237px;
+    border-radius: 5px;
+}
+
+.login-sumbit-button {
+    height: 25px;
+    width: 237px;
+    background-color: #484e55;
+    color: white;
+    cursor: pointer;
+}
