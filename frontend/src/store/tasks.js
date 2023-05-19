@@ -2,21 +2,27 @@ import { csrfFetch } from './csrf'
 
 const CREATETASK = 'tasks/create_task'
 const ALLTASKS = 'tasks/all_tasks'
+const EDITTASKS = 'tasks/edit_tasks'
 
 export const createTask = (task) => ({
     type: CREATETASK,
-    task    
+    task
 })
 
 export const allTheTasks = (tasks) => ({
     type: ALLTASKS,
     tasks
-}) 
+})
 
-export const createTaskThunk = (task) => async(dispatch) => {
+export const editTasks = (task) => ({
+    type: EDITTASKS,
+    task
+})
+
+export const createTaskThunk = (task) => async (dispatch) => {
     const response = await csrfFetch(`/api/tasks/`, {
         method: 'POST',
-        headers: {'Content-Type': "application/json"},
+        headers: { 'Content-Type': "application/json" },
         body: JSON.stringify(task)
     })
 
@@ -29,10 +35,24 @@ export const createTaskThunk = (task) => async(dispatch) => {
 
 export const allTasksThunk = () => async (dispatch) => {
     const response = await csrfFetch(`/api/tasks`)
-    
-    if(response.ok){
+
+    if (response.ok) {
         const task = await response.json()
         dispatch(allTheTasks(task))
+        return task
+    }
+}
+
+export const editTaskThunk = (task, taskId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/tasks/${taskId}`, {
+        method: 'PUT',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(task)
+    })
+
+    if (response.ok){
+        const task = await response.json()
+        dispatch(editTasks(task))
         return task
     }
 }
@@ -42,16 +62,19 @@ const initialState = {
 }
 
 export default function taskReducer(state = initialState, action) {
-    switch(action.type){
+    switch (action.type) {
         case ALLTASKS: {
             const allOfTheTasks = {}
             action.tasks.forEach((task) => {
                 allOfTheTasks[task.id] = task
             })
-            return {...state, allTasks: allOfTheTasks}
+            return { ...state, allTasks: allOfTheTasks }
         }
-        case CREATETASK: 
-        return {...state, allTasks:{...state.allTasks, [action.task.id]: action.task}}
+        case CREATETASK:
+            return { ...state, allTasks: { ...state.allTasks, [action.task.id]: action.task } }
+        case EDITTASKS: {
+            return {...state, allTasks: {...state.allTasks, [action.task.id]: action.task}}
+        }
         default:
             return state
     }

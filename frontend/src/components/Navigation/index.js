@@ -1,22 +1,15 @@
 // frontend/src/components/Navigation/index.js
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import OpenModalMenuItem from './OpenModalMenuItem';
-import CreateTasks from '../Task';
-import AllTasks from '../AllTasks';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import CreateTasks from '../CreateTask';
 
 function Navigation({ isLoaded }) {
-  const history = useHistory()
   const sessionUser = useSelector(state => state.session.user);
-  // const alltasks = (e) => {
-  //   e.preventDefault();
-  //   history.push('/tasks')
-  // }
+
   return (
     <div className="navbar navbar-inverse navbar-fixed-left">
       <div className='home-profile-main-div'>
