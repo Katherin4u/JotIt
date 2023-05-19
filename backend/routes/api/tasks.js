@@ -13,8 +13,8 @@ router.post(
     requireAuth,
     async (req, res) => {
         const userId = req.user.id
-        const { text, priority } = req.body;
-        const task = await Task.create({ userId, text, priority })
+        const { title, text, priority } = req.body;
+        const task = await Task.create({ userId, title, text, priority })
 
         return res.json(
             task

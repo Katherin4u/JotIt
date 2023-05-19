@@ -4,7 +4,6 @@ import { createTaskThunk } from "../../store/tasks"
 import { useHistory } from "react-router-dom"
 import Form from 'react-bootstrap/Form';
 
-// Not finished
 const CreateTasks = () => {
     const history = useHistory()
     const dispatch = useDispatch();
@@ -20,16 +19,19 @@ const CreateTasks = () => {
             text,
             priority
         }
-        let createdTask = await dispatch(createTaskThunk(task));
-
-        const id = createdTask.id
-        history.push(`/tasks/${id}`);
+        await dispatch(createTaskThunk(task))
     }
+
+    const closemodal = (e) => {
+        e.preventDefault();
+        history.push('/tasks')
+    }
+
     return (
         <div style={{ display: 'flex', justifyContent: 'center', flexDirection: "row" }}>
             <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column' }}>
                 <label>
-                    Task
+
                     <input
                         type="text"
                         value={title}
@@ -38,7 +40,7 @@ const CreateTasks = () => {
                     />
                 </label>
                 <label>
-                    Text
+
                     <input
                         type="text"
                         value={text}
@@ -53,6 +55,9 @@ const CreateTasks = () => {
                     <option value={priority}>Medium</option>
                     <option value={priority}>High</option>
                 </Form.Select>
+                <button type='submit' onClick={(e) => closemodal(e)}>
+                    Submit
+                </button>
             </form>
         </div>
     )
