@@ -15,16 +15,19 @@ const AllTasks = () => {
     //just checking the branch
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', flexDirection: "row", marginLeft: '2rem'}}>
-            {tasks.map((task) => (
-                <div>
-                    <div className="container-task">
-                        <div>{task.title}</div>
-                        <div>{task.priority}</div>
-                        <div>{task.text}</div>
+        <div style={{ display: 'flex', justifyContent: 'center', flexDirection: "column", marginLeft: '10rem' }}>
+            <div className="container-task2" >
+                {tasks.map((task) => (
+                    <div className="container-title-text-task">
+                        <div className="container-task">
+                            <div style={{paddingBottom: "10px"}}>{task.title}</div>
+                            <div style={{paddingBottom: "10px"}}>{task.priority}</div>
+                            <div>{task.text}</div>
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))}
+
+            </div>
         </div>
     )
 }

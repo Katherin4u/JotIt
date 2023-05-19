@@ -7,6 +7,10 @@
     text-decoration-line: none;
     font-weight: bold;
 }
+.task-link {
+    color: white;
+    text-decoration-line: none;
+}
 
 .navbar-fixed-left {
     width: 201px;
@@ -33,6 +37,13 @@
 }
 
 .homelink-main-div {
+    position: relative;
+    background-color: #484e55;
+    padding: 10px;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+.tasklink-main-div {
     position: relative;
     background-color: #484e55;
     padding: 10px;
