@@ -1,7 +1,7 @@
 import { csrfFetch } from './csrf'
 
 const CREATETASK = 'tasks/create_task'
-const ALLTASKS = 'allTasks/all_tasks'
+const ALLTASKS = 'tasks/all_tasks'
 
 export const createTask = (task) => ({
     type: CREATETASK,
@@ -15,16 +15,23 @@ export const allTheTasks = (tasks) => ({
 
 export const createTaskThunk = (task) => async(dispatch) => {
     const response = await csrfFetch(`/api/tasks/`, {
-        method: 'POST'
+        method: 'POST',
+        headers: {'Content-Type': "application/json"},
+        body: JSON.stringify(task)
     })
+
+    if (response.ok) {
+        const task = await response.json()
+        dispatch(createTask(task))
+        return task
+    }
 }
 
-export const allTasksThunk =() => async(dispatch) => {
-    const response = await csrfFetch( `/api/tasks`)
+export const allTasksThunk = () => async (dispatch) => {
+    const response = await csrfFetch(`/api/tasks`)
     
     if(response.ok){
         const task = await response.json()
-        console.log(task)
         dispatch(allTheTasks(task))
         return task
     }
@@ -36,11 +43,6 @@ const initialState = {
 
 export default function taskReducer(state = initialState, action) {
     switch(action.type){
-        case CREATETASK: 
-        return {
-            ...state,
-            [action.task.id]: action.task
-        };
         case ALLTASKS: {
             const allOfTheTasks = {}
             action.tasks.forEach((task) => {
@@ -48,6 +50,8 @@ export default function taskReducer(state = initialState, action) {
             })
             return {...state, allTasks: allOfTheTasks}
         }
+        case CREATETASK: 
+        return {...state, allTasks:{...state.allTasks, [action.task.id]: action.task}}
         default:
             return state
     }
