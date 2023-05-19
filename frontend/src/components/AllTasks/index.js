@@ -12,7 +12,7 @@ const AllTasks = () => {
     useEffect(() => {
         dispatch(allTasksThunk())
     }, [dispatch])
-
+    //just checking the branch
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', flexDirection: "row", marginLeft: '2rem'}}>
