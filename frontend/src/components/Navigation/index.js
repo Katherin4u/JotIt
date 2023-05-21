@@ -1,12 +1,11 @@
 // frontend/src/components/Navigation/index.js
 import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import OpenModalMenuItem from './OpenModalMenuItem';
-import CreateTasks from '../Task';
+import CreateTasks from '../CreateTask';
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
@@ -24,6 +23,12 @@ function Navigation({ isLoaded }) {
           </div>
           <div className='homelink-main-div'>
             <NavLink className='home-link' exact to="/">Home</NavLink>
+          </div>
+          <div style={{ paddingTop: '1px' }}>
+            <div className='tasklink-main-div'>
+              <NavLink className='task-link' exact to='/tasks'>Tasks</NavLink>
+            </div>
+
           </div>
           <div style={{ paddingTop: '2px' }}>
             <OpenModalMenuItem

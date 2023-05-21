@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { createTaskThunk } from "../../store/tasks"
 import { useHistory } from "react-router-dom"
+import { useModal } from "../../context/Modal"
 import Form from 'react-bootstrap/Form';
 
 const CreateTasks = () => {
@@ -10,6 +11,7 @@ const CreateTasks = () => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
     const [priority, setPriority] = useState('')
+    const { closeModal } = useModal(); // Access closeModal function from the ModalContext
 
     const submit = async (e) => {
         e.preventDefault();
@@ -19,13 +21,12 @@ const CreateTasks = () => {
             text,
             priority
         }
-        await dispatch(createTaskThunk(task))
+        dispatch(createTaskThunk(task)).then(() => {
+            closeModal(); 
+            history.push("/tasks");
+        });
     }
 
-    const closemodal = (e) => {
-        e.preventDefault();
-        history.push('/tasks')
-    }
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', flexDirection: "row" }}>
@@ -49,13 +50,13 @@ const CreateTasks = () => {
                     />
 
                 </label>
-                <Form.Select aria-label="Default select example">
+                <Form.Select aria-label="Default select example" value={priority} onChange={(e) => setPriority(e.target.value)}>
                     <option>Open this select menu</option>
-                    <option value={priority}>Low</option>
-                    <option value={priority}>Medium</option>
-                    <option value={priority}>High</option>
+                    <option value='Low' >Low</option>
+                    <option value='Medium'>Medium</option>
+                    <option value='High'>High</option>
                 </Form.Select>
-                <button type='submit' onClick={(e) => closemodal(e)}>
+                <button type='submit'>
                     Submit
                 </button>
             </form>

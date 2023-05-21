@@ -1,8 +1,26 @@
-.container-task{
+.container-task2 {
     display: grid;
-    grid-column-gap: 15px;
-    grid-row-gap: 2rem;
-    grid-template-columns: repeat(5fr, minmax(295px, 1fr));
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     padding: 1rem 1rem 1rem 4rem;
+}
+
+.container-task {
+    overflow: auto; /* Enable scrollbars when content exceeds div size */
+    max-height: 300px;
+    height: 149px;
+    word-break: break-all;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: solid rgb(197, 197, 197) 1px;
+    box-shadow: 11px 9px 5px 1px rgba(74, 74, 75, 0.2);
+}
+
+.container-title-text-task {
+    padding-right: 20px;
+    padding-bottom: 50px;
 }
