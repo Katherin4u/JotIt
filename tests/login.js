@@ -23,9 +23,9 @@ async function runTest() {
         // assert correct user is displayed
         const userProfile = await driver.findElement(By.className('profile-image')).getAttribute('src')
         if (userProfile.length > 0) {
-            console.log('Assertion passed: User is logged in');
+            console.log('Assertion Passed: User is logged in');
         } else {
-            console.log('Assertion failed: User is not logged in');
+            console.log('Assertion Failed: User is not logged in');
         }
 
         // Close the browser and end the Selenium test
