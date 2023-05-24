@@ -7,7 +7,7 @@
     text-decoration-line: none;
     font-weight: bold;
 }
-.task-link {
+.task-link, .notebooks-link{
     color: white;
     text-decoration-line: none;
 }
@@ -43,12 +43,12 @@
     padding-left: 80px;
     padding-right: 80px;
 }
-.tasklink-main-div {
+
+.tasklink-main-div, .notebooklink-main-div{
     position: relative;
     background-color: #484e55;
     padding: 10px;
-    padding-left: 80px;
-    padding-right: 80px;
+    text-align: center;
 }
 
 .profile-image {

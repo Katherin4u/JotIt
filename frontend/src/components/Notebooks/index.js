@@ -21,7 +21,6 @@ const AllNotebooks = () => {
 
     return (
         <div className="main-spot-Container">
-            <h2>Notebooks</h2>
             {notebooks.map((notebook) => (
                 <div>
                     <div key={notebook.id} onClick={() => handleNotebookClick(notebook.id)}>

@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf'
 
 const GET_ALL_NOTEBOOKS = 'notebooks/get_all_notebooks'
 const GET_NOTES = 'notebooks/get_notes'
+const CREATE_NOTEBOOK = 'notebooks/create_notebook'
 
 // short functions
 export const getAllNotebooks = (notebooks) => ({
@@ -13,6 +14,12 @@ export const getAllNotes = (note) => ({
     type: GET_NOTES,
     note
 })
+
+export const createNotebook = (notebook) => ({
+    type: CREATE_NOTEBOOK,
+    notebook
+})
+
 
 /**
  * Thunks
@@ -42,6 +49,21 @@ export const getAllNotesThunk = (notebookId) => async (dispatch) => {
     }
 }
 
+// create noteboook
+export const createNotebookThunk = (notebook) => async (dispatch) => {
+    const response = await csrfFetch(`/api/notebooks/`, {
+        method: 'POST',
+        headers: { 'Content-Type': "application/json" },
+        body: JSON.stringify(notebook)
+    })
+
+    if (response.ok) {
+        const notebook = await response.json()
+        dispatch(createNotebook(notebook))
+        return notebook
+    }
+}
+
 // initial state
 const initialState = {
     allNotebooks: {},
@@ -66,6 +88,8 @@ export default function notebookReducer(state = initialState, action) {
             })
             return { ...state, notes: allTheNotes }
         }
+        case CREATE_NOTEBOOK:
+            return { ...state, allNotebooks: { ...state.allNotebooks, [action.notebook.id]: action.notebook } }
         default:
             return state;
     }
