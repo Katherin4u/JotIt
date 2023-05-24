@@ -26,6 +26,9 @@
   "description": "",
   "dependencies": {
     "bootstrap": "^5.2.3",
-    "react-bootstrap": "^2.7.4"
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "react-bootstrap": "^2.7.4",
+    "selenium-webdriver": "^4.9.2"
   }
 }
