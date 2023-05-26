@@ -1,0 +1,12 @@
+.text-container-form {
+    padding-bottom: 20px;
+}
+
+.input-text-form {
+    padding: 7px;
+    border-radius: 7px;
+}
+
+.task-create-submit-button{
+    padding-top: 20px;
+}
