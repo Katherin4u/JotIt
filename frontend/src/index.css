@@ -3,3 +3,10 @@
 body {
     margin: 0px;
 }
+
+
+.buttonToLooseProperties {
+    /* { all: 'unset', cursor: 'pointer', color: 'white' } */
+    all: unset;
+    cursor: pointer;
+}

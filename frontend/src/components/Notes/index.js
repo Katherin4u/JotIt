@@ -7,22 +7,31 @@ import './index.css'
 const AllNotes = () => {
     const dispatch = useDispatch();
     const { noteId } = useParams();
+    const history = useHistory();
     const notesThunk = useSelector((state) => state.notebooks.notes)
     const notes = Object.values(notesThunk)
 
     useEffect(() => {
         dispatch(getAllNotesThunk(noteId))
-    }, [dispatch])
+    }, [dispatch, noteId])
+
+    const handleNoteClick = (noteId) => {
+        history.push(`/note/${noteId}`);
+    };
 
     return (
-        <div className="main-spot-Container">
-            <h2>Notes</h2>
-            {notes.map((note) => (
-                <div>
-                    {note.title}
-                </div>
-            ))}
+        <div style={{ display: 'flex', justifyContent: 'center', flexDirection: "column", marginLeft: '10rem' }}>
+            <div className="container-note2" >
+                {notes.map((note) => (
+                    <button key={note.id} onClick={() => handleNoteClick(note.id)} className="container-title-text-note buttonToLooseProperties">
+                        <div className="container-note">
+                            <div className="note-title">{note.title}</div>
+                            <div className="note-subtitle">{note.subtitle}</div>
+                        </div>
+                    </button>
+                ))}
 
+            </div>
         </div>
     )
 }

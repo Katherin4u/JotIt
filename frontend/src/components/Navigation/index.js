@@ -17,7 +17,6 @@ function Navigation({ isLoaded }) {
 
   // open menu logic
   const openCloseMenu = () => {
-    // if (showMenu) return;
     setShowMenu(!showMenu);
   };
 
@@ -52,9 +51,6 @@ function Navigation({ isLoaded }) {
               <button style={{ all: 'unset', cursor: 'pointer', color: 'white' }} onClick={openCloseMenu} className='notebooks-link' exact to='/notebooks'>Notebooks
                 {showMenu ? (
                   <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: "center" }}>
-                    {/* <div className="main-container-user-info">
-                      <div className="username">hello</div>
-                    </div> */}
                     <AllNotebooks />
                     <i class="fa-sharp fa-solid fa-angle-up"></i>
                   </div>

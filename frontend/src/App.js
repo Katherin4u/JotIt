@@ -22,11 +22,11 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/notebooks">
-            <Notebooks />
-          </Route>
           <Route path="/notebook/:noteId">
             <AllNotes />
+          </Route>
+          <Route path="/notebooks">
+            <Notebooks />
           </Route>
           <Route path="/tasks" >
             <AllTasks />
