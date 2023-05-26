@@ -7,6 +7,7 @@ import Notebooks from "./components/Notebooks";
 import AllNotes from "./components/Notes";
 // import CreateTasks from "./components/CreateTask";
 import AllTasks from "./components/AllTasks";
+import AllTags from "./components/AllTags";
 
 
 
@@ -30,6 +31,7 @@ function App() {
           </Route>
           <Route path="/tasks" >
             <AllTasks />
+            <AllTags />
           </Route>
         </Switch>
       )}

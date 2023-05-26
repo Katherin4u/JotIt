@@ -2,9 +2,9 @@ import { csrfFetch } from './csrf'
 
 const ALLTAGS = 'tags/all_tags'
 
-export const allTheTags = (tag) => ({
+export const allTheTags = (tags) => ({
     type: ALLTAGS,
-    tag
+    tags
 })
 
 

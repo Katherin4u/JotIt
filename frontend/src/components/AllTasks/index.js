@@ -42,7 +42,6 @@ const AllTasks = () => {
                                 <div style={{ paddingBottom: "10px" }}>{task.title}</div>
                                 <div style={{ paddingBottom: "10px" }}>{task.priority}</div>
                                 <div>{task.text}</div>
-                                
                             </div>
                         </div>
                     )

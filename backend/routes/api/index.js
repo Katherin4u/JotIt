@@ -6,6 +6,7 @@ const usersRouter = require('./users.js');
 const tagsRouter = require('./tags.js')
 const noteRouter = require('./notes.js')
 const notebookRouter = require('./notebooks.js')
+const tagTaskRouter = require('./TagTask.js')
 
 const tasksRouter = require('./tasks.js');
 
@@ -29,6 +30,8 @@ router.use('/notes', noteRouter)
 router.use('/notebooks', notebookRouter)
 
 router.use('/tasks', tasksRouter);
+
+router.use('/tagtasks', tagTaskRouter)
 
 
 // router.post('/test', (req, res) => {
