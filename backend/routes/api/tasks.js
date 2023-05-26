@@ -54,7 +54,7 @@ router.get(
 
 // edit an exisiting task
 router.put('/:taskId', requireAuth, async (req, res) => {
-    const { text, priority, } = req.body;
+    const { title, text, priority, } = req.body;
     const taskId = req.params.taskId
 
     const task = await Task.findByPk(taskId)
@@ -65,6 +65,7 @@ router.put('/:taskId', requireAuth, async (req, res) => {
 
     //update the task with the new data
     const updateTask = await task.update({
+        title,
         text,
         priority
     })

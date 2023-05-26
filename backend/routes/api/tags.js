@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 
     const tagsList = allTags.map((tag) => tag.toJSON());
 
-    return res.json({ Tags: tagsList });
+    return res.json(tagsList);
 });
 
 
@@ -21,23 +21,23 @@ router.post('/', requireAuth, async (req, res) => {
     const userId = req.user.id
     const { name, color } = req.body;
     const user = await Tag.create({ userId, name, color })
-    return res.json({
+    return res.json(
         user
-    })
+    )
 })
 
 //edit an exisiting tag
 router.put('/:tagId', requireAuth, async (req, res) => {
-    const {name, color} = req.body;
+    const { name, color } = req.body;
     const tagId = req.params.tagId
 
     const tag = await Tag.findByPk(tagId)
 
     //checks to see if the tag does not exists
-    if(!tag) return res.status(404).json({message: "Tag not found", statusCode: 404})
+    if (!tag) return res.status(404).json({ message: "Tag not found", statusCode: 404 })
 
     //checks to see if the current user is the owner of the tag
-    if(tag.userId !== req.user.id) return res.status(403).json({message: "Not Authorized", statusCode: 403})
+    if (tag.userId !== req.user.id) return res.status(403).json({ message: "Not Authorized", statusCode: 403 })
 
     //update the Tag with the new data
     const updateTag = await tag.update({
@@ -57,11 +57,11 @@ router.delete('/:tagId', requireAuth, async (req, res) => {
     const tag = await Tag.findByPk(tagId);
 
     //check to see if the tag exists
-    if(!tag){
-        return res.status(404).json({message: "Tag couldn't be found", statusCode: 403})
+    if (!tag) {
+        return res.status(404).json({ message: "Tag couldn't be found", statusCode: 403 })
     }
     // check to see if the user id matches the tag user id
-    if(tag.userId !== userId){
+    if (tag.userId !== userId) {
         return res.status(403).json({
             message: "Not Authorized",
             statusCode: 403
@@ -75,7 +75,7 @@ router.delete('/:tagId', requireAuth, async (req, res) => {
         statusCode: 200
     })
 
-}) 
+})
 
 // get all tasks from a specific tag
 
