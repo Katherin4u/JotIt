@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import notebookReducer from './notebooks'
 import taskReducer from './tasks';
+import tagReducer from './tags';
 
 
 // frontend/src/store/index.js
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     session: sessionReducer,
     notebooks: notebookReducer,
     tasks: taskReducer,
+    tags: tagReducer
 });
 
 
