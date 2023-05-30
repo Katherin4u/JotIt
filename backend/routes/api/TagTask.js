@@ -4,17 +4,26 @@ const { Op } = require('sequelize');
 const { TagTask, Tag, Task } = require('../../db/models')
 const { requireAuth } = require("../../utils/auth");
 
-// get all tags and tasks
-router.get('/', requireAuth, async (req, res) => {
+// get all tags from a task
+router.get('/:taskId', requireAuth, async (req, res) => {
     try {
-        const allTaskTags = await TagTask.findAll();
-        const taskTagList = allTaskTags.map((tagTask) => tagTask.toJSON());
-        return res.json(taskTagList);
+      const taskId  = req.params.taskId;
+      console.log('HALLO')
+  
+      // Find all TagTask entries with the given taskId
+      const taskTags = await TagTask.findAll({
+        where: { taskId },
+        include: [{ model: Tag }],
+      });
+  
+      // Extract the associated tags from the TagTask entries
+      const tags = taskTags.map((tagTask) => tagTask.Tag.toJSON());
+      return res.json(tags);
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Failed to retrieve task-tag associations' });
+      console.error(error);
+      return res.status(500).json({ error: 'Failed to retrieve tags for the task' });
     }
-});
+  });
 
 
 // Create a new task-tag association
