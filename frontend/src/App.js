@@ -31,7 +31,7 @@ function App() {
           </Route>
           <Route path="/tasks" >
             <AllTasks />
-            <AllTags />
+            {/* <AllTags /> */}
           </Route>
         </Switch>
       )}
