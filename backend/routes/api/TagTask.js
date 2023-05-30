@@ -5,7 +5,7 @@ const { TagTask, Tag, Task } = require('../../db/models')
 const { requireAuth } = require("../../utils/auth");
 
 // get all tags and tasks
-router.get('/', async (req, res) => {
+router.get('/', requireAuth, async (req, res) => {
     try {
         const allTaskTags = await TagTask.findAll();
         const taskTagList = allTaskTags.map((tagTask) => tagTask.toJSON());
@@ -19,42 +19,63 @@ router.get('/', async (req, res) => {
 
 // Create a new task-tag association
 router.post('/', async (req, res) => {
+
     try {
-        const { taskId, tagId } = req.body;
+        // Extract the necessary data from the request body
+        // const { tagId, taskId } = req.body;
+        const { tagId, taskId } = req.body;
+        // Create a new TagTask entry
+        const tagTask = await TagTask.create({ tagId, taskId });
 
-        const newTagTask = await TagTask.create({
-            taskId,
-            tagId
-        });
-
-        return res.json(newTagTask);
+        // Return the created tagTask in the response
+        res.status(201).json(tagTask);
     } catch (error) {
-        console.error('HERERERR', error); // Log the error
-        return res.status(500).json({ message: 'Server Error' });
+        console.error(error);
+        res.status(500).json({ error: 'Failed to create TagTask' });
     }
 });
 
 // Update a task-tag association
-router.put('/task-tags/:id', (req, res) => {
-    const taskTagId = req.params.id;
-    const { taskId, tagId } = req.body;
+router.put('/:tagtaskid', requireAuth, async (req, res) => {
+    const id = req.params.tagtaskid;
+    const { tagId, taskId } = req.body;
 
-    // Perform validation and error handling
+    // Find the TagTask entry by ID
+    const tagTask = await TagTask.findByPk(id);
 
-    // Update the specified task-tag association in the joint table based on the provided task and tag IDs
+    if (!tagTask) {
+        return res.status(404).json({ error: 'TagTask not found' });
+    }
 
-    // Return a success response or an error message
+    // Update the TagTask entry with the new data
+    tagTask.tagId = tagId;
+    tagTask.taskId = taskId;
+    await tagTask.save();
+
+    // Return the updated tagTask in the response
+    res.json(tagTask);
 });
 
 // Delete a task-tag association
-router.delete('/task-tags/:id', (req, res) => {
-    const taskTagId = req.params.id;
+router.delete('/:tagtaskid', requireAuth, async (req, res) => {
+    try {
+        const id = req.params.tagtaskid;
 
-    // Perform validation and error handling
+        // Find the TagTask entry by ID
+        const tagTask = await TagTask.findByPk(id);
 
-    // Delete the specified task-tag association from the joint table
+        if (!tagTask) {
+            return res.status(404).json({ error: 'TagTask not found' });
+        }
 
-    // Return a success response or an error message
+        // Delete the TagTask entry
+        await tagTask.destroy();
+
+        res.json({ message: 'TagTask deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to delete TagTask' });
+    }
 });
 
 module.exports = router;
