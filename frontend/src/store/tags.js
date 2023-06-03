@@ -1,5 +1,5 @@
 import { csrfFetch } from './csrf'
-
+// Actions!
 const ALLTAGS = 'tags/all_tags'
 const TAGSTASK = 'tags/all_tags_tasks'
 
